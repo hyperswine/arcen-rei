@@ -1,12 +1,10 @@
-use pkg::utility::{vertex,fragment}
+use std::graphics::shader::{vertex,fragment}
+use std::graphics::*
 
 Coords: [f16; 2]
 Pixel: [u8; 4]
 
-const RED = [255, 0, 0, 0]
-
-# Coords of a quad
-Quad: [Coords; 4]
+const RED = Pixel([255, 0, 0, 0])
 
 @vertex("render_quad") {
 input: {
@@ -43,12 +41,10 @@ main: () {
 }
 
 render_quad: (pos: Coords) {
-    core::lazy {
-        // 4 coords
-        let quad_coords = [
-            Coords(0, 0), Coords(1, 0), Coords(1, 1), Coords(0, 1)
-        ]
-    }
+    // 4 coords
+    static let quad_coords = [
+        Coords(0, 0), Coords(1, 0), Coords(1, 1), Coords(0, 1)
+    ]
 
     // render it to a specific location (model matrix)
     let model = Model(pos)
