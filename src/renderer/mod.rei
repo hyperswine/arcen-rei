@@ -1,53 +1,48 @@
 use pkg::utility::{vertex,fragment}
 
-type Coords = [f16; 2]
-type Pixel = [u8; 4]
+Coords: [f16; 2]
+Pixel: [u8; 4]
 
 const RED = [255, 0, 0, 0]
 
 # Coords of a quad
-data Quad([Coords; 4])
+Quad: [Coords; 4]
 
 @vertex("render_quad") {
-@input
-data {
+input: {
     input_vertex: Coords
 }
 
-@output
-data {
+output: {
     out: Vec4
 }
 
-@uniform
-data {
+uniform: {
     model: Mat4
     view: Mat4
     proj: Mat4
 }
 
-fn main() {
+main: () {
     out = model * view * proj * input_vertex
 }
 }
 
 @fragment("render_quad") {
-@input
-data {
+input: {
     input_coords: Vec4
 }
 
-@output
-data {
+output: {
     out: Pixel
 }
 
-fn main() {
+main: () {
     out = RED
 }
 }
 
-fn render_quad(pos: Coords) {
+render_quad: (pos: Coords) {
     core::lazy {
         // 4 coords
         let quad_coords = [

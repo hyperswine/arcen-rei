@@ -1,19 +1,19 @@
 use renderer::node::Node
 
-pub data Box(Node)
+export Box: Node
 
-pub data Flex(Node)
+export Flex: Node
 
-pub fn Flex(children: Children) -> Component {
+export Flex: (children: Children) -> Component {
     @arcen {
         
     }
 }
 
-pub data Heading(Node)
+export Heading: Node
 
-pub data Text(String)
+export Text: String
 
-pub data Image(String)
+export Image: String
 
-pub system Component {}
+export Component: {}

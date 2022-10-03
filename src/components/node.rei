@@ -1,54 +1,54 @@
 use std::math::{Vec2fh,Vec3b,Vec4fh}
 
-pub type Padding = Vec4fh
-pub type Borders = Vec4fh
-pub type ColorRGB = Vec3b
+export Padding: Vec4fh
+export Borders: Vec4fh
+export ColorRGB: Vec3b
 
-pub type FontFamily = String
-pub type FontSize = Size
-pub type Image = String
-pub type Surface3D = String
+export FontFamily: String
+export FontSize: Size
+export Image: String
+export Surface3D: String
 
-pub data Font {
-    pub font_family: FontFamily
-    pub font_size: FontSize
+export Font: {
+    font_family: FontFamily
+    font_size: FontSize
 }
 
-pub enum PositionType {
+export PositionType: enum {
     Relative
     Absolute
 }
 
-pub data Position {
+export Position: {
     position_type: PositionType
     position: Vec2fh
 }
 
-pub enum ContentAlignment {
+export ContentAlignment: enum {
     Start
     Center
     End
 }
 
-pub enum ContentSpacing {
+export ContentSpacing: enum {
     Around
     Between
     Even
 }
 
-pub enum Axis {
+export Axis: enum {
     Row
     Col
 }
 
-pub data Animate {
+export Animate: {
     duration_seconds: f64
     translate_to: Vec2fh
     rotate_by: Vec2fh
     scale_by: Vec2fh
 }
 
-pub data Node {
+export Node: {
     padding: Padding
     borders: Borders
     background_color: ColorRGB
