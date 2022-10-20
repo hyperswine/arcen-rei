@@ -6,40 +6,28 @@ Pixel: [u8; 4]
 
 const RED = Pixel([255, 0, 0, 0])
 
-@vertex("render_quad") {
-input: {
-    input_vertex: Coords
-}
-
-output: {
-    out: Vec4
-}
-
-uniform: {
+// the uniform keyword allows a globalish static var?
+QuadUniform: uniform {
     model: Mat4
     view: Mat4
     proj: Mat4
 }
 
-main: () {
-    out = model * view * proj * input_vertex
-}
-}
+let quad_uniform_data = QuadUniform()
 
-@fragment("render_quad") {
-input: {
-    input_coords: Vec4
-}
+# maybe allow the fn to be uniform1, 2, 3, etc?
+// I mean... now you think about it
+// why even like
+// I guess its easier to reason with for each shader in the pipeline
+// but parameterising the fn with those uniform types...
 
-output: {
-    out: Pixel
-}
+# a shader
+shade_vert_quad: (input_vertex: Coords) -> Vec4 => proj * view * model * input_vertex
 
-main: () {
-    out = RED
-}
-}
+# another shader
+shade_frag_quad_red: (input: Vec4) -> Pixel => RED
 
+# render quad code
 render_quad: (pos: Coords) {
     // 4 coords
     static let quad_coords = [
@@ -48,14 +36,10 @@ render_quad: (pos: Coords) {
 
     // render it to a specific location (model matrix)
     let model = Model(pos)
-    let view = View()
-    let proj = Proj()
+    let view = View(View2D)
+    let proj = Proj(Iso)
 
     // start
-    let shader = Shader("render_quad")
-    let pipeline = Pipeline()
-
-    pipeline.run(
-        shader, verts=quad_coords, model, view, proj
-    )
+    let pipeline = Pipeline(shaders=(shade_vert_quad, shade_frag_quad_red))
+    pipeline.run(shader, verts=quad_coords, model, view, proj)
 }
