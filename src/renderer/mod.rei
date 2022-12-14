@@ -4,7 +4,7 @@ use std::graphics::*
 Coords: [f16; 2]
 Pixel: [u8; 4]
 
-const RED = Pixel([255, 0, 0, 0])
+RED: Pixel([255, 0, 0, 0])
 
 // the uniform keyword allows a globalish static var?
 QuadUniform: uniform {
@@ -13,7 +13,9 @@ QuadUniform: uniform {
     proj: Mat4
 }
 
-let quad_uniform_data = QuadUniform()
+// once {
+//     mut quad_uniform_data = QuadUniform()
+// }
 
 # maybe allow the fn to be uniform1, 2, 3, etc?
 // I mean... now you think about it
