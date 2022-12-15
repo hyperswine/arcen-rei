@@ -11,3 +11,21 @@ export arcen: (scoped_body: ScopedBody) -> Node {
     // return the actual node
     Node(res)
 }
+
+// turn all S: (...) -> Component into a replace
+// &[T] means view in rei
+// not necessarily a fat pointer
+
+export gen_macros_for_components: (components: &[ArcenComponentSignature]) {
+    components.map(c => {
+        "
+            {c.name}: replace {
+                {"[" exprs: Expr* "]" body: ScopedBody | ArrowExpr} {
+                    // try to match each expr to a field in that Component
+                    // try to fit all the exprs in the scoped body into Components like Text & match them to a fitting component
+
+                }
+            }
+        "
+    })
+}
