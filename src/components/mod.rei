@@ -5,7 +5,7 @@ export Box: Node
 export Flex: Node
 
 export Flex: (children: Children) -> Component {
-    @arcen {
+    arcen {
         
     }
 }
